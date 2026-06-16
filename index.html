@@ -57,8 +57,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.4rem;
-      font-weight: 600;
+      font-size: 2rem;
+      font-weight: 700;
       color: white;
       flex-shrink: 0;
       box-shadow: 0 8px 16px -6px rgba(249, 115, 22, 0.4);
@@ -303,7 +303,6 @@
       z-index: 1;
     }
 
-    /* Эффект поворота и оранжевого свечения при наведении */
     .project-card:hover {
       transform: perspective(800px) rotateX(4deg) rotateY(6deg) scale(1.02);
       border-color: #f97316;
@@ -313,7 +312,6 @@
       z-index: 10;
     }
 
-    /* Дополнительный glow-эффект (псевдоэлемент) */
     .project-card::after {
       content: '';
       position: absolute;
@@ -330,7 +328,6 @@
       opacity: 1;
     }
 
-    /* Для музыкальной карточки — свой цвет свечения */
     .project-card.music-card:hover {
       border-color: #a78bfa;
       box-shadow: 0 0 30px rgba(167, 139, 250, 0.35),
@@ -565,7 +562,7 @@
       .avatar {
         width: 70px;
         height: 70px;
-        font-size: 2rem;
+        font-size: 1.5rem;
       }
 
       .profile-text h1 {
@@ -639,7 +636,6 @@
         padding: 0.4rem 1rem;
       }
 
-      /* На мобилках убираем сильный поворот, чтобы не мешал */
       .project-card:hover {
         transform: perspective(800px) rotateX(2deg) rotateY(3deg) scale(1.01);
       }
@@ -679,7 +675,7 @@
     <div class="profile">
       <div class="avatar">DP</div>
       <div class="profile-text">
-        <h1>Дмитрий Петров</h1>
+        <h1>Daniil Pashkevich</h1>
         <span class="badge"><i class="fas fa-code" style="margin-right: 6px;"></i>курсы программирования</span>
         <p>Frontend & fullstack-разработчик. 6 проектов, 4 платформы, музыка в свободное время.</p>
       </div>
@@ -697,7 +693,7 @@
     <div class="contact-links">
       <a href="#"><i class="fab fa-github"></i> github</a>
       <a href="#"><i class="fab fa-telegram"></i> telegram</a>
-      <a href="#"><i class="fas fa-envelope"></i> dp@dev.me</a>
+      <a href="mailto:daniilpash14@gmail.com"><i class="fas fa-envelope"></i> daniilpash14@gmail.com</a>
       <a href="#"><i class="fas fa-phone-alt"></i> +7 999 123-45-67</a>
     </div>
 
@@ -841,6 +837,12 @@
       </div>
     </div>
 
+    <div class="footnote">
+      <i class="fas fa-mobile-alt"></i> адаптивно · <i class="fas fa-heart" style="color: #f97316;"></i> тёмная тема · 6 проектов (включая музыку)
+    </div>
+  </main>
+</body>
+</html>
     <div class="footnote">
       <i class="fas fa-mobile-alt"></i> адаптивно · <i class="fas fa-heart" style="color: #f97316;"></i> тёмная тема · 6 проектов (включая музыку)
     </div>
