@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Портфолио · курсы программирования</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0b0f1a;
+      color: #e5e9f0;
+      line-height: 1.5;
+      padding: 1.5rem 1rem 3rem;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      max-width: 1200px;
+      width: 100%;
+      background: #141b2b;
+      border-radius: 2rem;
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.7);
+      padding: 2rem 1.8rem;
+      transition: all 0.2s ease;
+      border: 1px solid #2a3346;
+    }
+
+    /* ===== АВАТАР + ЗАГОЛОВОК ===== */
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(145deg, #f97316, #dc2626);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: white;
+      flex-shrink: 0;
+      box-shadow: 0 8px 16px -6px rgba(249, 115, 22, 0.4);
+    }
+
+    .profile-text h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #f0f4ff;
+    }
+
+    .profile-text .badge {
+      display: inline-block;
+      background: #2a3349;
+      color: #f97316;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      margin-top: 0.3rem;
+      border: 1px solid #f97316;
+      letter-spacing: 0.3px;
+    }
+
+    .profile-text p {
+      color: #a8b5d9;
+      margin-top: 0.3rem;
+      font-size: 0.95rem;
+      max-width: 500px;
+    }
+
+    /* ===== ПЛАТФОРМЫ ОБУЧЕНИЯ ===== */
+    .platforms {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.5rem;
+      background: #1a2335;
+      padding: 0.7rem 1.5rem;
+      border-radius: 60px;
+      margin-bottom: 2rem;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #2f3a52;
+    }
+
+    .platforms span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #ccd6f0;
+    }
+
+    .platforms span i {
+      color: #f97316;
+      font-size: 1.1rem;
+    }
+
+    /* ===== КОНТАКТЫ ===== */
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 2rem;
+      background: #1e263b;
+      padding: 0.9rem 1.5rem;
+      border-radius: 60px;
+      margin-bottom: 2rem;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #2f3a52;
+    }
+
+    .contact-links a {
+      color: #ccd6f0;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.15s;
+    }
+
+    .contact-links a i {
+      color: #f97316;
+      font-size: 1.1rem;
+      width: 1.4rem;
+      text-align: center;
+    }
+
+    .contact-links a:hover {
+      color: #fbbf24;
+    }
+
+    /* ===== РЕЗЮМЕ (УМЕНЬШЕННЫЙ) ===== */
+    .resume-section {
+      background: #1a2335;
+      border-radius: 1.5rem;
+      padding: 1.2rem 1.8rem;
+      margin-bottom: 2rem;
+      border: 1px solid #2d3850;
+      transition: border-color 0.2s;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .resume-section:hover {
+      border-color: #f97316;
+    }
+
+    .resume-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .resume-left i {
+      font-size: 1.6rem;
+      color: #f97316;
+    }
+
+    .resume-left .info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 2rem;
+    }
+
+    .resume-left .info-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .resume-left .info-item .label {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #6a7b9e;
+      font-weight: 600;
+    }
+
+    .resume-left .info-item .value {
+      font-size: 0.9rem;
+      color: #ccd6f0;
+      font-weight: 500;
+    }
+
+    .resume-left .info-item .value.highlight {
+      color: #fbbf24;
+    }
+
+    .resume-right {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-resume-small {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #f97316;
+      color: #0b0f1a;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-resume-small:hover {
+      background: #fb923c;
+    }
+
+    .btn-resume-outline-small {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: #ccd6f0;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.8rem;
+      text-decoration: none;
+      border: 1px solid #3b4867;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-resume-outline-small:hover {
+      border-color: #f97316;
+      color: #f97316;
+    }
+
+    /* ===== СЕТКА ПРОЕКТОВ ===== */
+    .projects-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #e5e9f0;
+    }
+
+    .projects-title i {
+      color: #f97316;
+      font-size: 1.6rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    /* ===== КАРТОЧКА С ПОВОРОТОМ И GLOW ===== */
+    .project-card {
+      background: #1a2335;
+      border-radius: 1.5rem;
+      padding: 1.5rem 1.5rem 1.8rem;
+      border: 1px solid #2d3850;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  box-shadow 0.4s ease, 
+                  border-color 0.4s ease;
+      transform: perspective(800px) rotateX(0deg) rotateY(0deg) scale(1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      will-change: transform;
+      cursor: default;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Эффект поворота и оранжевого свечения при наведении */
+    .project-card:hover {
+      transform: perspective(800px) rotateX(4deg) rotateY(6deg) scale(1.02);
+      border-color: #f97316;
+      box-shadow: 0 0 30px rgba(249, 115, 22, 0.35),
+                  0 0 60px rgba(249, 115, 22, 0.15),
+                  0 20px 40px -8px rgba(0, 0, 0, 0.6);
+      z-index: 10;
+    }
+
+    /* Дополнительный glow-эффект (псевдоэлемент) */
+    .project-card::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 1.6rem;
+      background: radial-gradient(circle at 50% 0%, rgba(249, 115, 22, 0.15), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .project-card:hover::after {
+      opacity: 1;
+    }
+
+    /* Для музыкальной карточки — свой цвет свечения */
+    .project-card.music-card:hover {
+      border-color: #a78bfa;
+      box-shadow: 0 0 30px rgba(167, 139, 250, 0.35),
+                  0 0 60px rgba(167, 139, 250, 0.15),
+                  0 20px 40px -8px rgba(0, 0, 0, 0.6);
+    }
+
+    .project-card.music-card::after {
+      background: radial-gradient(circle at 50% 0%, rgba(167, 139, 250, 0.15), transparent 70%);
+    }
+
+    .project-icon {
+      font-size: 2.2rem;
+      color: #f97316;
+      margin-bottom: 0.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .project-icon {
+      transform: scale(1.1) rotate(-3deg);
+    }
+
+    .project-card.music-card .project-icon {
+      color: #a78bfa;
+    }
+
+    .project-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.3rem;
+      color: #edf2fa;
+    }
+
+    .project-platform {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #fbbf24;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .project-platform i {
+      font-size: 0.7rem;
+    }
+
+    .project-card p {
+      color: #b0bfe0;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.6rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .tech-tags span {
+      background: #26304a;
+      color: #c9d4f0;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.25rem 0.7rem;
+      border-radius: 30px;
+      letter-spacing: 0.01em;
+      border: 1px solid #3b4867;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .project-card:hover .tech-tags span {
+      border-color: #f97316;
+      background: #2a3a5a;
+    }
+
+    .project-card.music-card:hover .tech-tags span {
+      border-color: #a78bfa;
+      background: #2a1a4a;
+    }
+
+    .project-link {
+      margin-top: auto;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #fbbf24;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s, color 0.2s;
+      width: fit-content;
+      border-bottom: 1.5px solid transparent;
+    }
+
+    .project-link i {
+      font-size: 0.8rem;
+      transition: transform 0.2s;
+    }
+
+    .project-link:hover {
+      gap: 0.7rem;
+      border-bottom-color: #fbbf24;
+      color: #fcd34d;
+    }
+
+    .project-link:hover i {
+      transform: translateX(3px);
+    }
+
+    .project-card.music-card .project-link {
+      color: #a78bfa;
+    }
+
+    .project-card.music-card .project-link:hover {
+      color: #c4b5fd;
+      border-bottom-color: #a78bfa;
+    }
+
+    /* ===== НИЖНИЙ БЛОК (УВЕЛИЧЕННЫЙ) ===== */
+    .bottom-section {
+      margin-top: 3rem;
+      border-top: 1px solid #2d3850;
+      padding-top: 2rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .skillset-large {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem 1.2rem;
+    }
+
+    .skillset-large .skill-item {
+      background: #1a2335;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #ccd6f0;
+      border: 1px solid #36445f;
+      transition: border-color 0.2s, transform 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .skillset-large .skill-item i {
+      color: #f97316;
+      font-size: 1rem;
+    }
+
+    .skillset-large .skill-item:hover {
+      border-color: #f97316;
+      transform: translateY(-2px);
+    }
+
+    .certificate-large {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.8rem;
+      background: #1a2335;
+      padding: 1.2rem 1.5rem;
+      border-radius: 1.2rem;
+      border: 1px solid #2d3850;
+      transition: border-color 0.2s;
+    }
+
+    .certificate-large:hover {
+      border-color: #f97316;
+    }
+
+    .certificate-large .cert-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .certificate-large .cert-header i {
+      font-size: 2rem;
+      color: #f59e0b;
+    }
+
+    .certificate-large .cert-header span {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #edf2fa;
+    }
+
+    .certificate-large .cert-desc {
+      font-size: 0.85rem;
+      color: #a8b5d9;
+      line-height: 1.6;
+    }
+
+    .certificate-large .cert-desc i {
+      color: #f97316;
+      margin-right: 0.3rem;
+    }
+
+    .certificate-large .cert-badge {
+      display: inline-block;
+      background: #2a3349;
+      color: #fbbf24;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      border: 1px solid #fbbf24;
+      margin-top: 0.2rem;
+    }
+
+    /* ===== АДАПТИВНОСТЬ ===== */
+    @media (max-width: 640px) {
+      .card {
+        padding: 1.5rem 1rem;
+      }
+
+      .profile {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+      }
+
+      .avatar {
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+      }
+
+      .profile-text h1 {
+        font-size: 1.6rem;
+      }
+
+      .platforms {
+        border-radius: 30px;
+        padding: 0.7rem 1.2rem;
+        justify-content: center;
+        gap: 0.5rem 1rem;
+      }
+
+      .platforms span {
+        font-size: 0.75rem;
+      }
+
+      .contact-links {
+        border-radius: 30px;
+        padding: 0.7rem 1.2rem;
+        justify-content: center;
+        gap: 0.8rem 1.5rem;
+      }
+
+      .contact-links a {
+        font-size: 0.85rem;
+      }
+
+      .resume-section {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem 1.2rem;
+        gap: 0.8rem;
+      }
+
+      .resume-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .resume-left .info {
+        gap: 0.3rem 1rem;
+      }
+
+      .resume-right {
+        justify-content: stretch;
+      }
+
+      .btn-resume-small, .btn-resume-outline-small {
+        flex: 1;
+        justify-content: center;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .bottom-section {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .certificate-large {
+        align-items: stretch;
+      }
+
+      .skillset-large .skill-item {
+        font-size: 0.8rem;
+        padding: 0.4rem 1rem;
+      }
+
+      /* На мобилках убираем сильный поворот, чтобы не мешал */
+      .project-card:hover {
+        transform: perspective(800px) rotateX(2deg) rotateY(3deg) scale(1.01);
+      }
+    }
+
+    @media (min-width: 641px) and (max-width: 900px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .bottom-section {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (min-width: 901px) {
+      .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .footnote {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6a7b9e;
+    }
+    .footnote i {
+      color: #f97316;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <!-- ПРОФИЛЬ -->
+    <div class="profile">
+      <div class="avatar">DP</div>
+      <div class="profile-text">
+        <h1>Дмитрий Петров</h1>
+        <span class="badge"><i class="fas fa-code" style="margin-right: 6px;"></i>курсы программирования</span>
+        <p>Frontend & fullstack-разработчик. 6 проектов, 4 платформы, музыка в свободное время.</p>
+      </div>
+    </div>
+
+    <!-- ПЛАТФОРМЫ ОБУЧЕНИЯ -->
+    <div class="platforms">
+      <span><i class="fas fa-graduation-cap"></i> Stepik</span>
+      <span><i class="fas fa-globe"></i> Coursera</span>
+      <span><i class="fas fa-code"></i> Codecademy</span>
+      <span><i class="fas fa-laptop"></i> Hexlet</span>
+    </div>
+
+    <!-- КОНТАКТЫ -->
+    <div class="contact-links">
+      <a href="#"><i class="fab fa-github"></i> github</a>
+      <a href="#"><i class="fab fa-telegram"></i> telegram</a>
+      <a href="#"><i class="fas fa-envelope"></i> dp@dev.me</a>
+      <a href="#"><i class="fas fa-phone-alt"></i> +7 999 123-45-67</a>
+    </div>
+
+    <!-- ===== РЕЗЮМЕ (УМЕНЬШЕННЫЙ) ===== -->
+    <div class="resume-section">
+      <div class="resume-left">
+        <i class="fas fa-file-alt"></i>
+        <div class="info">
+          <div class="info-item">
+            <span class="label">Образование</span>
+            <span class="value highlight">МГТУ им. Баумана</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Опыт</span>
+            <span class="value">Frontend-стажёр</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Навыки</span>
+            <span class="value">React · Vue · TS</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Языки</span>
+            <span class="value">Русский (C2) · Английский (B2)</span>
+          </div>
+        </div>
+      </div>
+      <div class="resume-right">
+        <a href="#" class="btn-resume-small"><i class="fas fa-file-pdf"></i> PDF</a>
+        <a href="#" class="btn-resume-outline-small"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="#" class="btn-resume-outline-small"><i class="fab fa-hh"></i> HH</a>
+      </div>
+    </div>
+
+    <!-- ПОРТФОЛИО -->
+    <div class="projects-title">
+      <i class="fas fa-folder-open"></i> 
+      <span>Проекты с курсов</span>
+    </div>
+
+    <div class="projects-grid">
+      <!-- МУЗЫКАЛЬНЫЙ ПРОЕКТ -->
+      <div class="project-card music-card">
+        <div class="project-icon"><i class="fas fa-music"></i></div>
+        <h3>not anywhere</h3>
+        <div class="project-platform"><i class="fas fa-headphones"></i> Suno AI</div>
+        <p>Экспериментальная музыкальная композиция, созданная с помощью нейросети. Атмосферный инди-поп с элементами лоу-фая.</p>
+        <div class="tech-tags">
+          <span>Suno AI</span><span>генерация музыки</span><span>эксперимент</span>
+        </div>
+        <a href="https://suno.com/s/wdbri0LGAmsEcYNN" target="_blank" class="project-link">Слушать <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Проект 1 -->
+      <div class="project-card">
+        <div class="project-icon"><i class="fas fa-cloud-sun"></i></div>
+        <h3>Погодный виджет</h3>
+        <div class="project-platform"><i class="fas fa-graduation-cap"></i> Stepik</div>
+        <p>Интерактивная карточка с текущей погодой по геолокации. Асинхронные запросы к OpenWeatherMap.</p>
+        <div class="tech-tags">
+          <span>JS</span><span>Fetch API</span><span>CSS</span>
+        </div>
+        <a href="#" class="project-link">Посмотреть <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Проект 2 -->
+      <div class="project-card">
+        <div class="project-icon"><i class="fas fa-tasks"></i></div>
+        <h3>Todo-менеджер</h3>
+        <div class="project-platform"><i class="fas fa-globe"></i> Coursera</div>
+        <p>Кастомный трекер задач с фильтрацией, локальным хранилищем и drag-n-drop.</p>
+        <div class="tech-tags">
+          <span>React</span><span>Hooks</span><span>LocalStorage</span>
+        </div>
+        <a href="#" class="project-link">Посмотреть <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Проект 3 -->
+      <div class="project-card">
+        <div class="project-icon"><i class="fas fa-calculator"></i></div>
+        <h3>Калькулятор инвестиций</h3>
+        <div class="project-platform"><i class="fas fa-code"></i> Codecademy</div>
+        <p>Расчёт сложного процента с визуализацией графика. Валидация, адаптив, тёмная тема.</p>
+        <div class="tech-tags">
+          <span>Vue 3</span><span>Chart.js</span><span>SCSS</span>
+        </div>
+        <a href="#" class="project-link">Посмотреть <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Проект 4 -->
+      <div class="project-card">
+        <div class="project-icon"><i class="fas fa-film"></i></div>
+        <h3>Кинопоиск-лайт</h3>
+        <div class="project-platform"><i class="fas fa-laptop"></i> Hexlet</div>
+        <p>Поиск фильмов по ключевым словам, карточки с рейтингом, избранное в localStorage.</p>
+        <div class="tech-tags">
+          <span>JavaScript</span><span>Axios</span><span>CSS Grid</span>
+        </div>
+        <a href="#" class="project-link">Посмотреть <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Проект 5 -->
+      <div class="project-card">
+        <div class="project-icon"><i class="fas fa-store"></i></div>
+        <h3>Магазин товаров</h3>
+        <div class="project-platform"><i class="fas fa-graduation-cap"></i> Stepik</div>
+        <p>Каталог с фильтрацией по категориям, корзина, подсчёт суммы. React + Redux Toolkit.</p>
+        <div class="tech-tags">
+          <span>React</span><span>Redux</span><span>Tailwind</span>
+        </div>
+        <a href="#" class="project-link">Посмотреть <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <!-- ===== НИЖНИЙ БЛОК (УВЕЛИЧЕННЫЙ) ===== -->
+    <div class="bottom-section">
+      <div class="skillset-large">
+        <span class="skill-item"><i class="fab fa-js"></i> JavaScript (ES6+)</span>
+        <span class="skill-item"><i class="fab fa-react"></i> React</span>
+        <span class="skill-item"><i class="fab fa-vuejs"></i> Vue 3</span>
+        <span class="skill-item"><i class="fas fa-code"></i> HTML5 / CSS3</span>
+        <span class="skill-item"><i class="fab fa-sass"></i> SCSS / Tailwind</span>
+        <span class="skill-item"><i class="fas fa-database"></i> REST API</span>
+        <span class="skill-item"><i class="fas fa-server"></i> Node.js / Express</span>
+        <span class="skill-item"><i class="fab fa-git-alt"></i> Git / GitHub</span>
+        <span class="skill-item"><i class="fas fa-cube"></i> Webpack / Vite</span>
+        <span class="skill-item"><i class="fas fa-paint-brush"></i> Figma / UI/UX</span>
+      </div>
+
+      <div class="certificate-large">
+        <div class="cert-header">
+          <i class="fas fa-award"></i>
+          <span>Сертификаты</span>
+        </div>
+        <div class="cert-desc">
+          <i class="fas fa-check-circle"></i> Fullstack-разработчик (Stepik, 2024)<br>
+          <i class="fas fa-check-circle"></i> React Professional (Coursera, 2024)<br>
+          <i class="fas fa-check-circle"></i> Vue.js Advanced (Codecademy, 2023)<br>
+          <i class="fas fa-check-circle"></i> Node.js API (Hexlet, 2024)
+        </div>
+        <span class="cert-badge"><i class="fas fa-star"></i> 8+ завершённых курсов</span>
+      </div>
+    </div>
+
+    <div class="footnote">
+      <i class="fas fa-mobile-alt"></i> адаптивно · <i class="fas fa-heart" style="color: #f97316;"></i> тёмная тема · 6 проектов (включая музыку)
+    </div>
+  </main>
+</body>
+</html>
