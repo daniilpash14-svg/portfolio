@@ -18,7 +18,6 @@
             min-height: 100vh;
         }
 
-        /* Навигация */
         .navbar {
             background: rgba(20, 20, 40, 0.95);
             padding: 15px 30px;
@@ -30,6 +29,8 @@
             z-index: 1000;
             border-bottom: 2px solid #f97316;
             backdrop-filter: blur(10px);
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .navbar .logo {
@@ -45,17 +46,19 @@
 
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 15px;
             list-style: none;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
             color: #ccc;
             text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s;
-            padding: 5px 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+            padding: 5px 12px;
             border-radius: 5px;
+            cursor: pointer;
         }
 
         .nav-links a:hover {
@@ -68,14 +71,12 @@
             background: rgba(249, 115, 22, 0.15);
         }
 
-        /* Основной контент */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 30px 20px;
         }
 
-        /* Секции */
         .section {
             display: none;
             animation: fadeIn 0.5s ease;
@@ -173,7 +174,6 @@
             padding: 25px;
             border: 1px solid #2a2a4a;
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
         .project-card:hover {
@@ -238,7 +238,7 @@
             color: #fbbf24;
         }
 
-        /* Игра */
+        /* ИГРА */
         .game-wrapper {
             background: rgba(20, 20, 40, 0.8);
             border-radius: 20px;
@@ -259,10 +259,10 @@
             border: 2px solid #2a2a4a;
         }
 
-        .game-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        .game-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+            display: block;
         }
 
         .game-controls {
@@ -305,13 +305,22 @@
 
         .game-info {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 15px;
             color: #888;
             font-size: 14px;
         }
 
         .game-info i {
             color: #f97316;
+        }
+
+        .game-info kbd {
+            background: rgba(50, 50, 80, 0.5);
+            padding: 2px 10px;
+            border-radius: 5px;
+            border: 1px solid #3a3a5a;
+            color: #fff;
+            font-size: 13px;
         }
 
         /* Резюме */
@@ -385,7 +394,6 @@
             color: #f97316;
         }
 
-        /* Нижняя секция */
         .bottom-section {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -458,7 +466,6 @@
             margin-top: 8px;
         }
 
-        /* Футер */
         .footer {
             text-align: center;
             padding: 30px 0 20px;
@@ -472,7 +479,6 @@
             color: #f97316;
         }
 
-        /* Адаптивность */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -481,14 +487,13 @@
             }
 
             .nav-links {
-                gap: 10px;
-                flex-wrap: wrap;
+                gap: 8px;
                 justify-content: center;
             }
 
             .nav-links a {
-                font-size: 14px;
-                padding: 5px 8px;
+                font-size: 13px;
+                padding: 4px 10px;
             }
 
             .profile-header {
@@ -540,8 +545,9 @@
             }
         }
     </style>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Pygame.js для запуска Python-игры в браузере -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js"></script>
 </head>
 <body>
 
@@ -549,16 +555,16 @@
 <nav class="navbar">
     <a href="#" class="logo">DP<span>.</span></a>
     <ul class="nav-links">
-        <li><a href="#" class="active" data-section="portfolio"><i class="fas fa-user"></i> Портфолио</a></li>
-        <li><a href="#" data-section="game"><i class="fas fa-gamepad"></i> Игра</a></li>
-        <li><a href="#" data-section="resume"><i class="fas fa-file-alt"></i> Резюме</a></li>
+        <li><a class="active" data-section="portfolio"><i class="fas fa-user"></i> Портфолио</a></li>
+        <li><a data-section="game"><i class="fas fa-gamepad"></i> Игра</a></li>
+        <li><a data-section="resume"><i class="fas fa-file-alt"></i> Резюме</a></li>
     </ul>
 </nav>
 
 <!-- Контент -->
 <div class="container">
 
-    <!-- Секция: Портфолио -->
+    <!-- Портфолио -->
     <div id="portfolio" class="section active">
         <div class="profile-header">
             <div class="avatar">DP</div>
@@ -658,32 +664,38 @@
         </div>
     </div>
 
-    <!-- Секция: Игра -->
+    <!-- ИГРА -->
     <div id="game" class="section">
         <h2 style="color: #fff; margin-bottom: 10px;"><i class="fas fa-gamepad" style="color: #f97316;"></i> Subway Runner</h2>
-        <p style="color: #888; margin-bottom: 20px;">Прыгай по платформам, собирай монеты и бей рекорды! <strong style="color: #f97316;">Двойной прыжок</strong> — нажми ПРОБЕЛ дважды в воздухе!</p>
+        <p style="color: #888; margin-bottom: 20px;">
+            Прыгай по платформам, собирай монеты и бей рекорды! 
+            <strong style="color: #f97316;">Двойной прыжок</strong> — нажми ПРОБЕЛ дважды в воздухе!
+        </p>
 
         <div class="game-wrapper">
-            <div class="game-container">
-                <iframe src="subway_runner.html" allowfullscreen></iframe>
+            <div class="game-container" id="game-container">
+                <canvas id="gameCanvas" width="800" height="600"></canvas>
             </div>
 
             <div class="game-controls">
-                <button class="btn btn-primary" onclick="document.querySelector('.game-container iframe').src = 'subway_runner.html'">
+                <button class="btn btn-primary" onclick="restartGame()">
                     <i class="fas fa-redo"></i> Перезапустить
                 </button>
-                <button class="btn" onclick="document.querySelector('.game-container iframe').contentWindow.focus();">
+                <button class="btn" onclick="document.getElementById('gameCanvas').focus()">
                     <i class="fas fa-expand"></i> В игру
                 </button>
             </div>
 
             <div class="game-info">
-                <i class="fas fa-keyboard"></i> ПРОБЕЛ — прыжок · P — пауза · R — рестарт
+                <i class="fas fa-keyboard"></i> 
+                <kbd>ПРОБЕЛ</kbd> — прыжок · 
+                <kbd>P</kbd> — пауза · 
+                <kbd>R</kbd> — рестарт
             </div>
         </div>
     </div>
 
-    <!-- Секция: Резюме -->
+    <!-- Резюме -->
     <div id="resume" class="section">
         <div class="resume-block">
             <div class="info">
@@ -739,32 +751,519 @@
         </div>
     </div>
 
-    <!-- Футер -->
     <div class="footer">
         <i class="fas fa-mobile-alt"></i> адаптивно · <i class="fas fa-heart"></i> Daniil Pashkevich · 6 проектов + игра
     </div>
-
 </div>
 
 <script>
-    // Навигация по секциям
+    // Навигация
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            // Убираем активный класс у всех ссылок
             document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
             this.classList.add('active');
-            
-            // Показываем нужную секцию
             const sectionId = this.dataset.section;
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
-            
-            // Прокрутка к верху
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     });
+
+    // ============ ИГРА НА PYTHON (Pyodide) ============
+    let gameRunning = false;
+    let pyodide = null;
+    let gameModule = null;
+
+    async function initPyodide() {
+        if (!pyodide) {
+            console.log("Загрузка Pyodide...");
+            pyodide = await loadPyodide({
+                indexURL: "https://cdn.jsdelivr.net/pyodide/v0.26.1/full/"
+            });
+            console.log("Pyodide загружен!");
+        }
+        return pyodide;
+    }
+
+    async function startGame() {
+        const canvas = document.getElementById('gameCanvas');
+        const container = document.getElementById('game-container');
+        
+        try {
+            const pyodide = await initPyodide();
+            
+            // Устанавливаем canvas для Pygame
+            pyodide.runPython(`
+                import sys
+                import os
+                os.environ['SDL_VIDEODRIVER'] = 'dummy'
+                os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+                sys.path.append('/home/pyodide')
+            `);
+
+            // Загружаем pygame.js
+            await pyodide.loadPackage('micropip');
+            const micropip = pyodide.pyimport('micropip');
+            await micropip.install('pygame');
+
+            // Код игры
+            const gameCode = `
+import pygame
+import random
+import json
+import os
+import math
+from datetime import datetime
+import js
+
+# Константы
+WIDTH, HEIGHT = 800, 600
+FPS = 60
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 50, 50)
+GREEN = (50, 255, 50)
+BLUE = (50, 50, 255)
+YELLOW = (255, 255, 50)
+ORANGE = (255, 150, 50)
+PURPLE = (200, 50, 255)
+CYAN = (50, 200, 255)
+DARK_BLUE = (20, 20, 50)
+DARK_GRAY = (40, 40, 40)
+GRAY = (100, 100, 100)
+LIGHT_GRAY = (200, 200, 200)
+
+PLATFORM_COLORS = [
+    (60, 60, 80), (70, 50, 50), (50, 70, 50),
+    (60, 50, 70), (50, 60, 70), (80, 60, 40), (40, 60, 80),
+]
+
+class Player:
+    def __init__(self):
+        self.width = 30
+        self.height = 50
+        self.x = 100
+        self.y = HEIGHT - 150 - self.height
+        self.y_velocity = 0
+        self.gravity = 0.8
+        self.jump_strength = -15
+        self.is_jumping = False
+        self.is_grounded = True
+        self.score = 0
+        self.coins = 0
+        self.distance = 0
+        self.speed = 6
+        self.anim_frame = 0
+        self.color = BLUE
+        self.on_platform = False
+        self.double_jump_available = True
+        self.has_double_jumped = False
+        self.jump_count = 0
+        self.max_jumps = 2
+        self.game_over = False
+        
+    def jump(self):
+        if self.is_grounded or self.on_platform:
+            self.y_velocity = self.jump_strength
+            self.is_jumping = True
+            self.is_grounded = False
+            self.on_platform = False
+            self.jump_count = 1
+            self.has_double_jumped = False
+            self.double_jump_available = True
+            return True
+        elif self.jump_count < self.max_jumps and not self.has_double_jumped:
+            self.y_velocity = self.jump_strength * 0.85
+            self.is_jumping = True
+            self.jump_count += 1
+            self.has_double_jumped = True
+            self.double_jump_available = False
+            return True
+        return False
+            
+    def update(self, platforms):
+        self.anim_frame += 0.1
+        self.y_velocity += self.gravity
+        self.y += self.y_velocity
+        self.is_grounded = False
+        self.on_platform = False
+        
+        ground_y = HEIGHT - 150 - self.height
+        if self.y >= ground_y:
+            self.y = ground_y
+            self.y_velocity = 0
+            self.is_jumping = False
+            self.is_grounded = True
+            self.on_platform = False
+            self.jump_count = 0
+            self.has_double_jumped = False
+            self.double_jump_available = True
+            
+        for platform in platforms:
+            if (self.x + self.width > platform.x + 10 and 
+                self.x < platform.x + platform.width - 10 and
+                self.y + self.height >= platform.y and 
+                self.y + self.height <= platform.y + 20 and
+                self.y_velocity >= 0):
+                self.y = platform.y - self.height
+                self.y_velocity = 0
+                self.is_jumping = False
+                self.is_grounded = True
+                self.on_platform = True
+                self.jump_count = 0
+                self.has_double_jumped = False
+                self.double_jump_available = True
+                break
+            
+        self.distance += self.speed
+        self.score = int(self.distance / 10)
+        
+    def draw(self, screen):
+        pygame.draw.ellipse(screen, (0, 0, 0, 50), (self.x + 5, HEIGHT - 140, self.width, 5))
+        body_rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        pygame.draw.rect(screen, self.color, body_rect)
+        pygame.draw.rect(screen, WHITE, body_rect, 2)
+        eye_y = self.y + 12
+        pygame.draw.circle(screen, WHITE, (self.x + 8, eye_y), 5)
+        pygame.draw.circle(screen, WHITE, (self.x + 22, eye_y), 5)
+        pygame.draw.circle(screen, BLACK, (self.x + 10, eye_y + 1), 3)
+        pygame.draw.circle(screen, BLACK, (self.x + 24, eye_y + 1), 3)
+        leg_offset = 8 * math.sin(self.anim_frame * 4)
+        leg1 = pygame.Rect(self.x + 5, self.y + self.height - 8, 6, 8 + leg_offset * 0.5)
+        leg2 = pygame.Rect(self.x + 19, self.y + self.height - 8, 6, 8 - leg_offset * 0.5)
+        pygame.draw.rect(screen, (30, 30, 60), leg1)
+        pygame.draw.rect(screen, (30, 30, 60), leg2)
+        pygame.draw.rect(screen, RED, (leg1.x - 2, leg1.y + leg1.height - 3, 10, 4))
+        pygame.draw.rect(screen, RED, (leg2.x - 2, leg2.y + leg2.height - 3, 10, 4))
+
+class Platform:
+    def __init__(self, x, y, width, color_index=0):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = 20
+        self.color = PLATFORM_COLORS[color_index % len(PLATFORM_COLORS)]
+        self.scored = False
+        
+    def update(self, speed):
+        self.x -= speed
+        if self.x + self.width < 0:
+            self.x = WIDTH + random.randint(150, 350)
+            self.width = random.randint(100, 250)
+            self.y = HEIGHT - 150 - random.randint(30, 120)
+            self.color = PLATFORM_COLORS[random.randint(0, len(PLATFORM_COLORS)-1)]
+            self.scored = False
+            
+    def draw(self, screen):
+        pygame.draw.rect(screen, self.color, (self.x, self.y, self.width, self.height))
+        pygame.draw.rect(screen, WHITE, (self.x, self.y, self.width, self.height), 2)
+        light_color = tuple(min(c + 30, 255) for c in self.color)
+        pygame.draw.rect(screen, light_color, (self.x + 5, self.y, self.width - 10, 3))
+
+class Coin:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.radius = 10
+        self.collected = False
+        self.anim_frame = random.random() * 10
+        
+    def update(self, speed):
+        self.x -= speed
+        self.anim_frame += 0.1
+        
+    def draw(self, screen):
+        if self.collected:
+            return
+        pulse = 1 + 0.2 * math.sin(self.anim_frame * 2)
+        radius = self.radius * pulse
+        pygame.draw.circle(screen, YELLOW, (int(self.x), int(self.y)), int(radius))
+        pygame.draw.circle(screen, ORANGE, (int(self.x), int(self.y)), int(radius), 2)
+        
+    def check_collision(self, player):
+        if self.collected:
+            return False
+        dx = self.x - (player.x + player.width // 2)
+        dy = self.y - (player.y + player.height // 2)
+        return math.hypot(dx, dy) < self.radius + 20
+
+class Obstacle:
+    def __init__(self, x, y, width=30, height=30):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.active = True
+        self.color = RED
+        
+    def update(self, speed):
+        self.x -= speed
+        if self.x + self.width < 0:
+            self.active = False
+            
+    def draw(self, screen):
+        if not self.active:
+            return
+        pygame.draw.rect(screen, self.color, (self.x, self.y, self.width, self.height))
+        pygame.draw.rect(screen, (200, 0, 0), (self.x, self.y, self.width, self.height), 2)
+        
+    def check_collision(self, player):
+        if not self.active:
+            return False
+        return (player.x < self.x + self.width and
+                player.x + player.width > self.x and
+                player.y < self.y + self.height and
+                player.y + player.height > self.y)
+
+class Particle:
+    def __init__(self, x, y, color):
+        self.x = x
+        self.y = y
+        self.vx = random.uniform(-3, 3)
+        self.vy = random.uniform(-5, -1)
+        self.life = 30
+        self.max_life = 30
+        self.color = color
+        self.size = random.randint(3, 6)
+        
+    def update(self):
+        self.x += self.vx
+        self.y += self.vy
+        self.vy += 0.1
+        self.life -= 1
+        
+    def draw(self, screen):
+        if self.life <= 0:
+            return
+        size = int(self.size * self.life / self.max_life)
+        if size > 0:
+            pygame.draw.circle(screen, self.color, (int(self.x), int(self.y)), size)
+
+class Game:
+    def __init__(self):
+        self.player = Player()
+        self.platforms = []
+        self.coins = []
+        self.obstacles = []
+        self.score = 0
+        self.coins_collected = 0
+        self.distance = 0
+        self.speed = 6
+        self.game_over = False
+        self.paused = False
+        self.high_score = 0
+        self.particles = []
+        self.coin_spawn_timer = 0
+        
+        platform_positions = [
+            (150, HEIGHT - 150 - 30), (350, HEIGHT - 150 - 80),
+            (550, HEIGHT - 150 - 40), (750, HEIGHT - 150 - 90),
+            (950, HEIGHT - 150 - 50), (1150, HEIGHT - 150 - 70),
+        ]
+        for i, (x, y) in enumerate(platform_positions):
+            self.platforms.append(Platform(x, y, random.randint(120, 200), i))
+        for _ in range(20):
+            self.spawn_coin()
+        for _ in range(2):
+            self.spawn_obstacle()
+            
+    def spawn_coin(self):
+        if self.platforms:
+            platform = random.choice(self.platforms)
+            x = platform.x + random.randint(20, platform.width - 20)
+            y = platform.y - random.randint(30, 70)
+        else:
+            x = WIDTH + random.randint(50, 400)
+            y = random.randint(100, HEIGHT - 200)
+        self.coins.append(Coin(x, y))
+        
+    def spawn_obstacle(self):
+        self.obstacles.append(Obstacle(WIDTH + random.randint(200, 600), HEIGHT - 150 - 30, random.randint(25, 45), 30))
+        
+    def update(self):
+        if self.game_over or self.paused:
+            return
+        self.player.update(self.platforms)
+        self.score = self.player.score
+        self.distance = self.player.distance
+        self.speed = 6 + self.distance / 1500
+        self.player.speed = self.speed
+        
+        for platform in self.platforms:
+            platform.update(self.speed)
+            
+        self.coin_spawn_timer += 1
+        if self.coin_spawn_timer > 12 and len(self.coins) < 30:
+            self.spawn_coin()
+            self.coin_spawn_timer = 0
+            
+        for coin in self.coins[:]:
+            coin.update(self.speed)
+            if coin.check_collision(self.player):
+                coin.collected = True
+                self.coins_collected += 1
+                self.player.coins += 1
+                self.score += 50
+                for _ in range(10):
+                    self.particles.append(Particle(coin.x, coin.y, YELLOW))
+                self.coins.remove(coin)
+                
+        for obstacle in self.obstacles[:]:
+            obstacle.update(self.speed)
+            if obstacle.check_collision(self.player):
+                self.game_over = True
+                self.player.game_over = True
+                for _ in range(30):
+                    self.particles.append(Particle(
+                        self.player.x + self.player.width//2,
+                        self.player.y + self.player.height//2, RED))
+                
+        if len(self.obstacles) < 3 + int(self.distance / 2000):
+            self.spawn_obstacle()
+            
+        for particle in self.particles[:]:
+            particle.update()
+            if particle.life <= 0:
+                self.particles.remove(particle)
+                
+    def draw(self, screen):
+        screen.fill(DARK_BLUE)
+        pygame.draw.rect(screen, (40, 40, 60), (0, HEIGHT - 150, WIDTH, 150))
+        pygame.draw.rect(screen, (80, 80, 100), (0, HEIGHT - 150, WIDTH, 5))
+        
+        for platform in self.platforms:
+            platform.draw(screen)
+        for coin in self.coins:
+            coin.draw(screen)
+        for obstacle in self.obstacles:
+            obstacle.draw(screen)
+        self.player.draw(screen)
+        for particle in self.particles:
+            particle.draw(screen)
+            
+        # UI
+        pygame.draw.rect(screen, (20, 20, 30), (0, 0, WIDTH, 60))
+        pygame.draw.line(screen, GRAY, (0, 60), (WIDTH, 60), 2)
+        
+        font = pygame.font.Font(None, 36)
+        font_small = pygame.font.Font(None, 24)
+        
+        score_text = font.render(f"⭐ {self.score}", True, WHITE)
+        screen.blit(score_text, (20, 15))
+        coin_text = font.render(f"🪙 {self.coins_collected}", True, YELLOW)
+        screen.blit(coin_text, (200, 15))
+        dist_text = font_small.render(f"📏 {int(self.distance // 10)}м", True, LIGHT_GRAY)
+        screen.blit(dist_text, (380, 25))
+        speed_text = font_small.render(f"🚀 {int(self.speed * 10)}", True, LIGHT_GRAY)
+        screen.blit(speed_text, (520, 25))
+        
+        if self.game_over:
+            overlay = pygame.Surface((WIDTH, HEIGHT))
+            overlay.set_alpha(180)
+            overlay.fill(BLACK)
+            screen.blit(overlay, (0, 0))
+            font_big = pygame.font.Font(None, 48)
+            title = font_big.render("💀 ИГРА ОКОНЧЕНА", True, RED)
+            title_rect = title.get_rect(center=(WIDTH//2, HEIGHT//2 - 100))
+            screen.blit(title, title_rect)
+            score_text2 = font.render(f"⭐ Счет: {self.score}", True, WHITE)
+            score_rect = score_text2.get_rect(center=(WIDTH//2, HEIGHT//2 - 30))
+            screen.blit(score_text2, score_rect)
+            coin_text2 = font.render(f"🪙 Монет: {self.coins_collected}", True, YELLOW)
+            coin_rect = coin_text2.get_rect(center=(WIDTH//2, HEIGHT//2 + 20))
+            screen.blit(coin_text2, coin_rect)
+            restart_text = font.render("Нажми R для рестарта", True, GREEN)
+            restart_rect = restart_text.get_rect(center=(WIDTH//2, HEIGHT//2 + 140))
+            screen.blit(restart_text, restart_rect)
+            
+        pygame.display.flip()
+
+def main():
+    pygame.init()
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption("Subway Runner")
+    clock = pygame.time.Clock()
+    game = Game()
+    running = True
+    
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE and not game.game_over and not game.paused:
+                    game.player.jump()
+                if event.key == pygame.K_p:
+                    game.paused = not game.paused
+                if event.key == pygame.K_r:
+                    game = Game()
+                    
+        game.update()
+        game.draw(screen)
+        clock.tick(FPS)
+        
+    pygame.quit()
+
+# Запуск в браузере
+main()
+`;
+
+            // Запускаем игру
+            pyodide.runPython(gameCode);
+            gameRunning = true;
+            
+        } catch (error) {
+            console.error("Ошибка запуска игры:", error);
+            document.getElementById('game-container').innerHTML = `
+                <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#888;flex-direction:column;gap:15px;">
+                    <i class="fas fa-exclamation-triangle" style="font-size:48px;color:#f97316;"></i>
+                    <p>Не удалось загрузить игру. Попробуйте обновить страницу.</p>
+                    <button onclick="location.reload()" style="padding:10px 25px;background:#f97316;border:none;border-radius:10px;color:#0a0a1a;font-weight:600;cursor:pointer;">Обновить</button>
+                </div>
+            `;
+        }
+    }
+
+    // Запускаем игру при загрузке
+    document.addEventListener('DOMContentLoaded', () => {
+        // Ждём, пока пользователь переключится на вкладку "Игра"
+        const gameLink = document.querySelector('[data-section="game"]');
+        const originalClick = gameLink.onclick;
+        
+        gameLink.addEventListener('click', async function(e) {
+            if (!gameRunning) {
+                document.getElementById('game-container').innerHTML = `
+                    <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#888;flex-direction:column;gap:15px;">
+                        <i class="fas fa-spinner fa-spin" style="font-size:48px;color:#f97316;"></i>
+                        <p>Загрузка игры...</p>
+                    </div>
+                `;
+                await startGame();
+            }
+        });
+    });
+
+    function restartGame() {
+        if (gameRunning) {
+            // Перезапуск через Pyodide
+            try {
+                pyodide.runPython(`
+                    # Пересоздаём игру
+                    game = Game()
+                `);
+            } catch (e) {
+                console.error("Ошибка перезапуска:", e);
+            }
+        }
+    }
+
+    // Для старых браузеров — загружаем сразу
+    setTimeout(() => {
+        if (!gameRunning && document.getElementById('game').classList.contains('active')) {
+            startGame();
+        }
+    }, 1000);
 </script>
 
 </body>
