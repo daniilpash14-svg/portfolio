@@ -1,845 +1,771 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Портфолио · Daniil Pashkevich</title>
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0b0f1a;
-      color: #e5e9f0;
-      line-height: 1.5;
-      padding: 1.5rem 1rem 3rem;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .card {
-      max-width: 1200px;
-      width: 100%;
-      background: #141b2b;
-      border-radius: 2rem;
-      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.7);
-      padding: 2rem 1.8rem;
-      transition: all 0.2s ease;
-      border: 1px solid #2a3346;
-    }
-
-    /* ===== АВАТАР + ЗАГОЛОВОК ===== */
-    .profile {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-    }
-
-    .avatar {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(145deg, #f97316, #dc2626);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: 700;
-      color: white;
-      flex-shrink: 0;
-      box-shadow: 0 8px 16px -6px rgba(249, 115, 22, 0.4);
-    }
-
-    .profile-text h1 {
-      font-size: 1.9rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      color: #f0f4ff;
-    }
-
-    .profile-text .badge {
-      display: inline-block;
-      background: #2a3349;
-      color: #f97316;
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 0.3rem 1rem;
-      border-radius: 40px;
-      margin-top: 0.3rem;
-      border: 1px solid #f97316;
-      letter-spacing: 0.3px;
-    }
-
-    .profile-text p {
-      color: #a8b5d9;
-      margin-top: 0.3rem;
-      font-size: 0.95rem;
-      max-width: 500px;
-    }
-
-    /* ===== ПЛАТФОРМЫ ОБУЧЕНИЯ ===== */
-    .platforms {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem 1.5rem;
-      background: #1a2335;
-      padding: 0.7rem 1.5rem;
-      border-radius: 60px;
-      margin-bottom: 2rem;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #2f3a52;
-    }
-
-    .platforms span {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #ccd6f0;
-    }
-
-    .platforms span i {
-      color: #f97316;
-      font-size: 1.1rem;
-    }
-
-    /* ===== КОНТАКТЫ ===== */
-    .contact-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem 2rem;
-      background: #1e263b;
-      padding: 0.9rem 1.5rem;
-      border-radius: 60px;
-      margin-bottom: 2rem;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #2f3a52;
-    }
-
-    .contact-links a {
-      color: #ccd6f0;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: color 0.15s;
-    }
-
-    .contact-links a i {
-      color: #f97316;
-      font-size: 1.1rem;
-      width: 1.4rem;
-      text-align: center;
-    }
-
-    .contact-links a:hover {
-      color: #fbbf24;
-    }
-
-    /* ===== РЕЗЮМЕ (УМЕНЬШЕННЫЙ) ===== */
-    .resume-section {
-      background: #1a2335;
-      border-radius: 1.5rem;
-      padding: 1.2rem 1.8rem;
-      margin-bottom: 2rem;
-      border: 1px solid #2d3850;
-      transition: border-color 0.2s;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .resume-section:hover {
-      border-color: #f97316;
-    }
-
-    .resume-left {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .resume-left i {
-      font-size: 1.6rem;
-      color: #f97316;
-    }
-
-    .resume-left .info {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 2rem;
-    }
-
-    .resume-left .info-item {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .resume-left .info-item .label {
-      font-size: 0.6rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #6a7b9e;
-      font-weight: 600;
-    }
-
-    .resume-left .info-item .value {
-      font-size: 0.9rem;
-      color: #ccd6f0;
-      font-weight: 500;
-    }
-
-    .resume-left .info-item .value.highlight {
-      color: #fbbf24;
-    }
-
-    .resume-right {
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-resume-small {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: #f97316;
-      color: #0b0f1a;
-      padding: 0.4rem 1.2rem;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 0.8rem;
-      text-decoration: none;
-      transition: background 0.2s;
-      border: none;
-      cursor: pointer;
-    }
-
-    .btn-resume-small:hover {
-      background: #fb923c;
-    }
-
-    .btn-resume-outline-small {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: transparent;
-      color: #ccd6f0;
-      padding: 0.4rem 1.2rem;
-      border-radius: 40px;
-      font-weight: 500;
-      font-size: 0.8rem;
-      text-decoration: none;
-      border: 1px solid #3b4867;
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    .btn-resume-outline-small:hover {
-      border-color: #f97316;
-      color: #f97316;
-    }
-
-    /* ===== СЕТКА ПРОЕКТОВ ===== */
-    .projects-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: #e5e9f0;
-    }
-
-    .projects-title i {
-      color: #f97316;
-      font-size: 1.6rem;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    /* ===== КАРТОЧКА С ПОВОРОТОМ И GLOW ===== */
-    .project-card {
-      background: #1a2335;
-      border-radius: 1.5rem;
-      padding: 1.5rem 1.5rem 1.8rem;
-      border: 1px solid #2d3850;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                  box-shadow 0.4s ease, 
-                  border-color 0.4s ease;
-      transform: perspective(800px) rotateX(0deg) rotateY(0deg) scale(1);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      will-change: transform;
-      cursor: default;
-      position: relative;
-      z-index: 1;
-    }
-
-    .project-card:hover {
-      transform: perspective(800px) rotateX(4deg) rotateY(6deg) scale(1.02);
-      border-color: #f97316;
-      box-shadow: 0 0 30px rgba(249, 115, 22, 0.35),
-                  0 0 60px rgba(249, 115, 22, 0.15),
-                  0 20px 40px -8px rgba(0, 0, 0, 0.6);
-      z-index: 10;
-    }
-
-    .project-card::after {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border-radius: 1.6rem;
-      background: radial-gradient(circle at 50% 0%, rgba(249, 115, 22, 0.15), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .project-card:hover::after {
-      opacity: 1;
-    }
-
-    .project-card.music-card:hover {
-      border-color: #a78bfa;
-      box-shadow: 0 0 30px rgba(167, 139, 250, 0.35),
-                  0 0 60px rgba(167, 139, 250, 0.15),
-                  0 20px 40px -8px rgba(0, 0, 0, 0.6);
-    }
-
-    .project-card.music-card::after {
-      background: radial-gradient(circle at 50% 0%, rgba(167, 139, 250, 0.15), transparent 70%);
-    }
-
-    .project-icon {
-      font-size: 2.2rem;
-      color: #f97316;
-      margin-bottom: 0.8rem;
-      transition: transform 0.3s ease;
-    }
-
-    .project-card:hover .project-icon {
-      transform: scale(1.1) rotate(-3deg);
-    }
-
-    .project-card.music-card .project-icon {
-      color: #a78bfa;
-    }
-
-    .project-card h3 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.3rem;
-      color: #edf2fa;
-    }
-
-    .project-platform {
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: #fbbf24;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .project-platform i {
-      font-size: 0.7rem;
-    }
-
-    .project-card p {
-      color: #b0bfe0;
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-      flex: 1;
-    }
-
-    .tech-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem 0.6rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .tech-tags span {
-      background: #26304a;
-      color: #c9d4f0;
-      font-size: 0.7rem;
-      font-weight: 500;
-      padding: 0.25rem 0.7rem;
-      border-radius: 30px;
-      letter-spacing: 0.01em;
-      border: 1px solid #3b4867;
-      transition: border-color 0.3s ease, background 0.3s ease;
-    }
-
-    .project-card:hover .tech-tags span {
-      border-color: #f97316;
-      background: #2a3a5a;
-    }
-
-    .project-card.music-card:hover .tech-tags span {
-      border-color: #a78bfa;
-      background: #2a1a4a;
-    }
-
-    .project-link {
-      margin-top: auto;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: #fbbf24;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: gap 0.2s, color 0.2s;
-      width: fit-content;
-      border-bottom: 1.5px solid transparent;
-    }
-
-    .project-link i {
-      font-size: 0.8rem;
-      transition: transform 0.2s;
-    }
-
-    .project-link:hover {
-      gap: 0.7rem;
-      border-bottom-color: #fbbf24;
-      color: #fcd34d;
-    }
-
-    .project-link:hover i {
-      transform: translateX(3px);
-    }
-
-    .project-card.music-card .project-link {
-      color: #a78bfa;
-    }
-
-    .project-card.music-card .project-link:hover {
-      color: #c4b5fd;
-      border-bottom-color: #a78bfa;
-    }
-
-    /* ===== НИЖНИЙ БЛОК (УВЕЛИЧЕННЫЙ) ===== */
-    .bottom-section {
-      margin-top: 3rem;
-      border-top: 1px solid #2d3850;
-      padding-top: 2rem;
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 2rem;
-      align-items: start;
-    }
-
-    .skillset-large {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem 1.2rem;
-    }
-
-    .skillset-large .skill-item {
-      background: #1a2335;
-      padding: 0.5rem 1.2rem;
-      border-radius: 40px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #ccd6f0;
-      border: 1px solid #36445f;
-      transition: border-color 0.2s, transform 0.15s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .skillset-large .skill-item i {
-      color: #f97316;
-      font-size: 1rem;
-    }
-
-    .skillset-large .skill-item:hover {
-      border-color: #f97316;
-      transform: translateY(-2px);
-    }
-
-    .certificate-large {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.8rem;
-      background: #1a2335;
-      padding: 1.2rem 1.5rem;
-      border-radius: 1.2rem;
-      border: 1px solid #2d3850;
-      transition: border-color 0.2s;
-    }
-
-    .certificate-large:hover {
-      border-color: #f97316;
-    }
-
-    .certificate-large .cert-header {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .certificate-large .cert-header i {
-      font-size: 2rem;
-      color: #f59e0b;
-    }
-
-    .certificate-large .cert-header span {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #edf2fa;
-    }
-
-    .certificate-large .cert-desc {
-      font-size: 0.85rem;
-      color: #a8b5d9;
-      line-height: 1.6;
-    }
-
-    .certificate-large .cert-desc i {
-      color: #f97316;
-      margin-right: 0.3rem;
-    }
-
-    .certificate-large .cert-badge {
-      display: inline-block;
-      background: #2a3349;
-      color: #fbbf24;
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 0.2rem 0.8rem;
-      border-radius: 30px;
-      border: 1px solid #fbbf24;
-      margin-top: 0.2rem;
-    }
-
-    /* ===== АДАПТИВНОСТЬ ===== */
-    @media (max-width: 640px) {
-      .card {
-        padding: 1.5rem 1rem;
-      }
-
-      .profile {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.8rem;
-      }
-
-      .avatar {
-        width: 70px;
-        height: 70px;
-        font-size: 1.5rem;
-      }
-
-      .profile-text h1 {
-        font-size: 1.6rem;
-      }
-
-      .platforms {
-        border-radius: 30px;
-        padding: 0.7rem 1.2rem;
-        justify-content: center;
-        gap: 0.5rem 1rem;
-      }
-
-      .platforms span {
-        font-size: 0.75rem;
-      }
-
-      .contact-links {
-        border-radius: 30px;
-        padding: 0.7rem 1.2rem;
-        justify-content: center;
-        gap: 0.8rem 1.5rem;
-      }
-
-      .contact-links a {
-        font-size: 0.85rem;
-      }
-
-      .resume-section {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 1rem 1.2rem;
-        gap: 0.8rem;
-      }
-
-      .resume-left {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-      }
-
-      .resume-left .info {
-        gap: 0.3rem 1rem;
-      }
-
-      .resume-right {
-        justify-content: stretch;
-      }
-
-      .btn-resume-small, .btn-resume-outline-small {
-        flex: 1;
-        justify-content: center;
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      .bottom-section {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      .certificate-large {
-        align-items: stretch;
-      }
-
-      .skillset-large .skill-item {
-        font-size: 0.8rem;
-        padding: 0.4rem 1rem;
-      }
-
-      .project-card:hover {
-        transform: perspective(800px) rotateX(2deg) rotateY(3deg) scale(1.01);
-      }
-    }
-
-    @media (min-width: 641px) and (max-width: 900px) {
-      .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .bottom-section {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-    }
-
-    @media (min-width: 901px) {
-      .projects-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .footnote {
-      margin-top: 2rem;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #6a7b9e;
-    }
-    .footnote i {
-      color: #f97316;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniil Pashkevich · Портфолио + Игра</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a1a;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        /* Навигация */
+        .navbar {
+            background: rgba(20, 20, 40, 0.95);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #f97316;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f97316;
+            text-decoration: none;
+        }
+
+        .navbar .logo span {
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            color: #f97316;
+            background: rgba(249, 115, 22, 0.1);
+        }
+
+        .nav-links a.active {
+            color: #f97316;
+            background: rgba(249, 115, 22, 0.15);
+        }
+
+        /* Основной контент */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Секции */
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Портфолио */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f97316, #dc2626);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 0 40px rgba(249, 115, 22, 0.3);
+        }
+
+        .profile-info h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .profile-info .badge {
+            display: inline-block;
+            background: rgba(249, 115, 22, 0.2);
+            color: #f97316;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #f97316;
+            margin-top: 5px;
+        }
+
+        .profile-info p {
+            color: #aaa;
+            margin-top: 8px;
+            font-size: 16px;
+        }
+
+        .platforms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: rgba(30, 30, 50, 0.5);
+            padding: 15px 25px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            border: 1px solid #2a2a4a;
+        }
+
+        .platforms span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .platforms span i {
+            color: #f97316;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .project-card {
+            background: rgba(30, 30, 50, 0.6);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #2a2a4a;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #f97316;
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.15);
+        }
+
+        .project-card .icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .project-card h3 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .project-card .platform-tag {
+            color: #f97316;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .project-card .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .project-card .tech-tags span {
+            background: rgba(50, 50, 80, 0.5);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 11px;
+            color: #ccc;
+            border: 1px solid #3a3a5a;
+        }
+
+        .project-card .link {
+            display: inline-block;
+            margin-top: 12px;
+            color: #f97316;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .project-card .link:hover {
+            color: #fbbf24;
+        }
+
+        /* Игра */
+        .game-wrapper {
+            background: rgba(20, 20, 40, 0.8);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #2a2a4a;
+            margin-top: 20px;
+        }
+
+        .game-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            aspect-ratio: 800/600;
+            background: #0a0a1a;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #2a2a4a;
+        }
+
+        .game-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .game-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .game-controls .btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(50, 50, 80, 0.5);
+            color: #ccc;
+            border: 1px solid #3a3a5a;
+        }
+
+        .game-controls .btn:hover {
+            background: rgba(249, 115, 22, 0.2);
+            border-color: #f97316;
+            color: #fff;
+        }
+
+        .game-controls .btn-primary {
+            background: #f97316;
+            color: #0a0a1a;
+            border: none;
+        }
+
+        .game-controls .btn-primary:hover {
+            background: #fb923c;
+            transform: scale(1.05);
+        }
+
+        .game-info {
+            text-align: center;
+            margin-top: 10px;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .game-info i {
+            color: #f97316;
+        }
+
+        /* Резюме */
+        .resume-block {
+            background: rgba(30, 30, 50, 0.5);
+            border-radius: 15px;
+            padding: 25px 30px;
+            border: 1px solid #2a2a4a;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .resume-block .info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px 40px;
+        }
+
+        .resume-block .info-item .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        .resume-block .info-item .value {
+            font-size: 15px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .resume-block .info-item .value.highlight {
+            color: #f97316;
+        }
+
+        .resume-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .resume-buttons a {
+            padding: 8px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .resume-buttons .btn-pdf {
+            background: #f97316;
+            color: #0a0a1a;
+        }
+
+        .resume-buttons .btn-pdf:hover {
+            background: #fb923c;
+        }
+
+        .resume-buttons .btn-outline {
+            background: transparent;
+            color: #ccc;
+            border: 1px solid #3a3a5a;
+        }
+
+        .resume-buttons .btn-outline:hover {
+            border-color: #f97316;
+            color: #f97316;
+        }
+
+        /* Нижняя секция */
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skills .skill {
+            background: rgba(30, 30, 50, 0.5);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            color: #ccc;
+            border: 1px solid #2a2a4a;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skills .skill:hover {
+            border-color: #f97316;
+            transform: translateY(-2px);
+        }
+
+        .skills .skill i {
+            color: #f97316;
+        }
+
+        .certificates {
+            background: rgba(30, 30, 50, 0.5);
+            border-radius: 15px;
+            padding: 20px 25px;
+            border: 1px solid #2a2a4a;
+        }
+
+        .certificates h3 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .certificates .cert-item {
+            color: #aaa;
+            font-size: 14px;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .certificates .cert-item i {
+            color: #f59e0b;
+        }
+
+        .certificates .badge-cert {
+            display: inline-block;
+            background: rgba(249, 115, 22, 0.15);
+            color: #fbbf24;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            border: 1px solid #fbbf24;
+            margin-top: 8px;
+        }
+
+        /* Футер */
+        .footer {
+            text-align: center;
+            padding: 30px 0 20px;
+            color: #555;
+            font-size: 13px;
+            border-top: 1px solid #1a1a2a;
+            margin-top: 40px;
+        }
+
+        .footer i {
+            color: #f97316;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 15px;
+            }
+
+            .nav-links {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+                padding: 5px 8px;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-info h1 {
+                font-size: 28px;
+            }
+
+            .platforms {
+                border-radius: 20px;
+                padding: 12px 15px;
+                justify-content: center;
+            }
+
+            .bottom-section {
+                grid-template-columns: 1fr;
+            }
+
+            .resume-block {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .resume-block .info {
+                justify-content: center;
+            }
+
+            .resume-buttons {
+                justify-content: center;
+            }
+
+            .game-container {
+                aspect-ratio: 800/600;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-controls .btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <main class="card">
-    <!-- ПРОФИЛЬ -->
-    <div class="profile">
-      <div class="avatar">DP</div>
-      <div class="profile-text">
-        <h1>Daniil Pashkevich</h1>
-        <span class="badge"><i class="fas fa-code" style="margin-right: 6px;"></i>курсы программирования</span>
-        <p>Frontend & fullstack-разработчик. 6 проектов, 4 платформы, музыка в свободное время.</p>
-      </div>
+
+<!-- Навигация -->
+<nav class="navbar">
+    <a href="#" class="logo">DP<span>.</span></a>
+    <ul class="nav-links">
+        <li><a href="#" class="active" data-section="portfolio"><i class="fas fa-user"></i> Портфолио</a></li>
+        <li><a href="#" data-section="game"><i class="fas fa-gamepad"></i> Игра</a></li>
+        <li><a href="#" data-section="resume"><i class="fas fa-file-alt"></i> Резюме</a></li>
+    </ul>
+</nav>
+
+<!-- Контент -->
+<div class="container">
+
+    <!-- Секция: Портфолио -->
+    <div id="portfolio" class="section active">
+        <div class="profile-header">
+            <div class="avatar">DP</div>
+            <div class="profile-info">
+                <h1>Daniil Pashkevich</h1>
+                <span class="badge"><i class="fas fa-code"></i> курсы программирования</span>
+                <p>Frontend & fullstack-разработчик. 6 проектов, 4 платформы, музыка и игры в свободное время.</p>
+            </div>
+        </div>
+
+        <div class="platforms">
+            <span><i class="fas fa-graduation-cap"></i> Stepik</span>
+            <span><i class="fas fa-globe"></i> Coursera</span>
+            <span><i class="fas fa-code"></i> Codecademy</span>
+            <span><i class="fas fa-laptop"></i> Hexlet</span>
+        </div>
+
+        <h2 style="color: #fff; margin-bottom: 15px;"><i class="fas fa-folder-open" style="color: #f97316;"></i> Проекты с курсов</h2>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="icon">🎵</div>
+                <h3>not anywhere</h3>
+                <div class="platform-tag"><i class="fas fa-headphones"></i> Suno AI</div>
+                <p>Экспериментальная музыкальная композиция, созданная с помощью нейросети.</p>
+                <div class="tech-tags">
+                    <span>Suno AI</span>
+                    <span>генерация музыки</span>
+                </div>
+                <a href="https://suno.com/s/wdbri0LGAmsEcYNN" target="_blank" class="link">Слушать →</a>
+            </div>
+
+            <div class="project-card">
+                <div class="icon">🌤️</div>
+                <h3>Погодный виджет</h3>
+                <div class="platform-tag"><i class="fas fa-graduation-cap"></i> Stepik</div>
+                <p>Интерактивная карточка с текущей погодой по геолокации.</p>
+                <div class="tech-tags">
+                    <span>JS</span>
+                    <span>Fetch API</span>
+                    <span>CSS</span>
+                </div>
+                <a href="#" class="link">Посмотреть →</a>
+            </div>
+
+            <div class="project-card">
+                <div class="icon">📋</div>
+                <h3>Todo-менеджер</h3>
+                <div class="platform-tag"><i class="fas fa-globe"></i> Coursera</div>
+                <p>Трекер задач с фильтрацией, локальным хранилищем и drag-n-drop.</p>
+                <div class="tech-tags">
+                    <span>React</span>
+                    <span>Hooks</span>
+                    <span>LocalStorage</span>
+                </div>
+                <a href="#" class="link">Посмотреть →</a>
+            </div>
+
+            <div class="project-card">
+                <div class="icon">📊</div>
+                <h3>Калькулятор инвестиций</h3>
+                <div class="platform-tag"><i class="fas fa-code"></i> Codecademy</div>
+                <p>Расчёт сложного процента с визуализацией графика.</p>
+                <div class="tech-tags">
+                    <span>Vue 3</span>
+                    <span>Chart.js</span>
+                    <span>SCSS</span>
+                </div>
+                <a href="#" class="link">Посмотреть →</a>
+            </div>
+
+            <div class="project-card">
+                <div class="icon">🎬</div>
+                <h3>Кинопоиск-лайт</h3>
+                <div class="platform-tag"><i class="fas fa-laptop"></i> Hexlet</div>
+                <p>Поиск фильмов по ключевым словам, карточки с рейтингом.</p>
+                <div class="tech-tags">
+                    <span>JavaScript</span>
+                    <span>Axios</span>
+                    <span>CSS Grid</span>
+                </div>
+                <a href="#" class="link">Посмотреть →</a>
+            </div>
+
+            <div class="project-card">
+                <div class="icon">🛒</div>
+                <h3>Магазин товаров</h3>
+                <div class="platform-tag"><i class="fas fa-graduation-cap"></i> Stepik</div>
+                <p>Каталог с фильтрацией, корзина, подсчёт суммы. React + Redux.</p>
+                <div class="tech-tags">
+                    <span>React</span>
+                    <span>Redux</span>
+                    <span>Tailwind</span>
+                </div>
+                <a href="#" class="link">Посмотреть →</a>
+            </div>
+        </div>
     </div>
 
-    <!-- ПЛАТФОРМЫ ОБУЧЕНИЯ -->
-    <div class="platforms">
-      <span><i class="fas fa-graduation-cap"></i> Stepik</span>
-      <span><i class="fas fa-globe"></i> Coursera</span>
-      <span><i class="fas fa-code"></i> Codecademy</span>
-      <span><i class="fas fa-laptop"></i> Hexlet</span>
+    <!-- Секция: Игра -->
+    <div id="game" class="section">
+        <h2 style="color: #fff; margin-bottom: 10px;"><i class="fas fa-gamepad" style="color: #f97316;"></i> Subway Runner</h2>
+        <p style="color: #888; margin-bottom: 20px;">Прыгай по платформам, собирай монеты и бей рекорды! <strong style="color: #f97316;">Двойной прыжок</strong> — нажми ПРОБЕЛ дважды в воздухе!</p>
+
+        <div class="game-wrapper">
+            <div class="game-container">
+                <iframe src="subway_runner.html" allowfullscreen></iframe>
+            </div>
+
+            <div class="game-controls">
+                <button class="btn btn-primary" onclick="document.querySelector('.game-container iframe').src = 'subway_runner.html'">
+                    <i class="fas fa-redo"></i> Перезапустить
+                </button>
+                <button class="btn" onclick="document.querySelector('.game-container iframe').contentWindow.focus();">
+                    <i class="fas fa-expand"></i> В игру
+                </button>
+            </div>
+
+            <div class="game-info">
+                <i class="fas fa-keyboard"></i> ПРОБЕЛ — прыжок · P — пауза · R — рестарт
+            </div>
+        </div>
     </div>
 
-    <!-- КОНТАКТЫ -->
-    <div class="contact-links">
-      <a href="https://github.com/daniilpash14-svg" target="_blank"><i class="fab fa-github"></i> github</a>
-      <a href="https://web.telegram.org/a/#5162724101" target="_blank"><i class="fab fa-telegram"></i> telegram</a>
-      <a href="mailto:daniilpash14@gmail.com"><i class="fas fa-envelope"></i> daniilpash14@gmail.com</a>
-      <a href="#"><i class="fas fa-phone-alt"></i> +7 999 123-45-67</a>
+    <!-- Секция: Резюме -->
+    <div id="resume" class="section">
+        <div class="resume-block">
+            <div class="info">
+                <div class="info-item">
+                    <div class="label">Образование</div>
+                    <div class="value highlight">МГТУ им. Баумана</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Опыт</div>
+                    <div class="value">Frontend-стажёр</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Навыки</div>
+                    <div class="value">React · Vue · TS</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Языки</div>
+                    <div class="value">Русский (C2) · Английский (B2)</div>
+                </div>
+            </div>
+            <div class="resume-buttons">
+                <a href="#" class="btn-pdf"><i class="fas fa-file-pdf"></i> PDF</a>
+                <a href="#" class="btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="#" class="btn-outline"><i class="fab fa-hh"></i> HH</a>
+            </div>
+        </div>
+
+        <div class="bottom-section">
+            <div>
+                <h3 style="color: #fff; margin-bottom: 12px;"><i class="fas fa-code" style="color: #f97316;"></i> Навыки</h3>
+                <div class="skills">
+                    <span class="skill"><i class="fab fa-js"></i> JavaScript (ES6+)</span>
+                    <span class="skill"><i class="fab fa-react"></i> React</span>
+                    <span class="skill"><i class="fab fa-vuejs"></i> Vue 3</span>
+                    <span class="skill"><i class="fas fa-code"></i> HTML5 / CSS3</span>
+                    <span class="skill"><i class="fab fa-sass"></i> SCSS / Tailwind</span>
+                    <span class="skill"><i class="fas fa-database"></i> REST API</span>
+                    <span class="skill"><i class="fas fa-server"></i> Node.js</span>
+                    <span class="skill"><i class="fab fa-git-alt"></i> Git</span>
+                    <span class="skill"><i class="fas fa-cube"></i> Webpack</span>
+                    <span class="skill"><i class="fas fa-paint-brush"></i> Figma</span>
+                </div>
+            </div>
+
+            <div class="certificates">
+                <h3><i class="fas fa-award" style="color: #f59e0b;"></i> Сертификаты</h3>
+                <div class="cert-item"><i class="fas fa-check-circle"></i> Fullstack-разработчик (Stepik, 2024)</div>
+                <div class="cert-item"><i class="fas fa-check-circle"></i> React Professional (Coursera, 2024)</div>
+                <div class="cert-item"><i class="fas fa-check-circle"></i> Vue.js Advanced (Codecademy, 2023)</div>
+                <div class="cert-item"><i class="fas fa-check-circle"></i> Node.js API (Hexlet, 2024)</div>
+                <span class="badge-cert"><i class="fas fa-star"></i> 8+ завершённых курсов</span>
+            </div>
+        </div>
     </div>
 
-    <!-- ===== РЕЗЮМЕ (УМЕНЬШЕННЫЙ) ===== -->
-    <div class="resume-section">
-      <div class="resume-left">
-        <i class="fas fa-file-alt"></i>
-        <div class="info">
-          <div class="info-item">
-            <span class="label">Образование</span>
-            <span class="value highlight">МГТУ им. Баумана</span>
-          </div>
-          <div class="info-item">
-            <span class="label">Опыт</span>
-            <span class="value">Frontend-стажёр</span>
-          </div>
-          <div class="info-item">
-            <span class="label">Навыки</span>
-            <span class="value">React · Vue · TS</span>
-          </div>
-          <div class="info-item">
-            <span class="label">Языки</span>
-            <span class="value">Русский (C2) · Английский (B2)</span>
-          </div>
-        </div>
-      </div>
-      <div class="resume-right">
-        <a href="#" class="btn-resume-small"><i class="fas fa-file-pdf"></i> PDF</a>
-        <a href="#" class="btn-resume-outline-small"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="#" class="btn-resume-outline-small"><i class="fab fa-hh"></i> HH</a>
-      </div>
+    <!-- Футер -->
+    <div class="footer">
+        <i class="fas fa-mobile-alt"></i> адаптивно · <i class="fas fa-heart"></i> Daniil Pashkevich · 6 проектов + игра
     </div>
 
-    <!-- ПОРТФОЛИО -->
-    <div class="projects-title">
-      <i class="fas fa-folder-open"></i> 
-      <span>Проекты с курсов</span>
-    </div>
+</div>
 
-    <div class="projects-grid">
-      <!-- МУЗЫКАЛЬНЫЙ ПРОЕКТ -->
-      <div class="project-card music-card">
-        <div class="project-icon"><i class="fas fa-music"></i></div>
-        <h3>not anywhere</h3>
-        <div class="project-platform"><i class="fas fa-headphones"></i> Suno AI</div>
-        <p>Экспериментальная музыкальная композиция, созданная с помощью нейросети. Атмосферный инди-поп с элементами лоу-фая.</p>
-        <div class="tech-tags">
-          <span>Suno AI</span><span>генерация музыки</span><span>эксперимент</span>
-        </div>
-        <a href="https://suno.com/s/wdbri0LGAmsEcYNN" target="_blank" class="project-link">Слушать <i class="fas fa-arrow-right"></i></a>
-      </div>
+<script>
+    // Навигация по секциям
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Убираем активный класс у всех ссылок
+            document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Показываем нужную секцию
+            const sectionId = this.dataset.section;
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Прокрутка к верху
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+</script>
 
-      <!-- Проект 1 -->
-      <div class="project-card">
-        <div class="project-icon"><i class="fas fa-cloud-sun"></i></div>
-        <h3>Погодный виджет</h3>
-        <div class="project-platform"><i class="fas fa-graduation-cap"></i> Stepik</div>
-        <p>Интерактивная карточка с текущей погодой по геолокации. Асинхронные запросы к OpenWeatherMap.</p>
-        <div class="tech-tags">
-          <span>JS</span><span>Fetch API</span><span>CSS</span>
-        </div>
-        <a href="#" class="project-link">Посмотреть <i class="fas fa-arrow-right"></i></a>
-      </div>
-
-      <!-- Проект 2 -->
-      <div class="project-card">
-        <div class="project-icon"><i class="fas fa-tasks"></i></div>
-        <h3>Todo-менеджер</h3>
-        <div class="project-platform"><i class="fas fa-globe"></i> Coursera</div>
-        <p>Кастомный трекер задач с фильтрацией, локальным хранилищем и drag-n-drop.</p>
-        <div class="tech-tags">
-          <span>React</span><span>Hooks</span><span>LocalStorage</span>
-        </div>
-        <a href="#" class="project-link">Посмотреть <i class="fas fa-arrow-right"></i></a>
-      </div>
-
-      <!-- Проект 3 -->
-      <div class="project-card">
-        <div class="project-icon"><i class="fas fa-calculator"></i></div>
-        <h3>Калькулятор инвестиций</h3>
-        <div class="project-platform"><i class="fas fa-code"></i> Codecademy</div>
-        <p>Расчёт сложного процента с визуализацией графика. Валидация, адаптив, тёмная тема.</p>
-        <div class="tech-tags">
-          <span>Vue 3</span><span>Chart.js</span><span>SCSS</span>
-        </div>
-        <a href="#" class="project-link">Посмотреть <i class="fas fa-arrow-right"></i></a>
-      </div>
-
-      <!-- Проект 4 -->
-      <div class="project-card">
-        <div class="project-icon"><i class="fas fa-film"></i></div>
-        <h3>Кинопоиск-лайт</h3>
-        <div class="project-platform"><i class="fas fa-laptop"></i> Hexlet</div>
-        <p>Поиск фильмов по ключевым словам, карточки с рейтингом, избранное в localStorage.</p>
-        <div class="tech-tags">
-          <span>JavaScript</span><span>Axios</span><span>CSS Grid</span>
-        </div>
-        <a href="#" class="project-link">Посмотреть <i class="fas fa-arrow-right"></i></a>
-      </div>
-
-      <!-- Проект 5 -->
-      <div class="project-card">
-        <div class="project-icon"><i class="fas fa-store"></i></div>
-        <h3>Магазин товаров</h3>
-        <div class="project-platform"><i class="fas fa-graduation-cap"></i> Stepik</div>
-        <p>Каталог с фильтрацией по категориям, корзина, подсчёт суммы. React + Redux Toolkit.</p>
-        <div class="tech-tags">
-          <span>React</span><span>Redux</span><span>Tailwind</span>
-        </div>
-        <a href="#" class="project-link">Посмотреть <i class="fas fa-arrow-right"></i></a>
-      </div>
-    </div>
-
-    <!-- ===== НИЖНИЙ БЛОК (УВЕЛИЧЕННЫЙ) ===== -->
-    <div class="bottom-section">
-      <div class="skillset-large">
-        <span class="skill-item"><i class="fab fa-js"></i> JavaScript (ES6+)</span>
-        <span class="skill-item"><i class="fab fa-react"></i> React</span>
-        <span class="skill-item"><i class="fab fa-vuejs"></i> Vue 3</span>
-        <span class="skill-item"><i class="fas fa-code"></i> HTML5 / CSS3</span>
-        <span class="skill-item"><i class="fab fa-sass"></i> SCSS / Tailwind</span>
-        <span class="skill-item"><i class="fas fa-database"></i> REST API</span>
-        <span class="skill-item"><i class="fas fa-server"></i> Node.js / Express</span>
-        <span class="skill-item"><i class="fab fa-git-alt"></i> Git / GitHub</span>
-        <span class="skill-item"><i class="fas fa-cube"></i> Webpack / Vite</span>
-        <span class="skill-item"><i class="fas fa-paint-brush"></i> Figma / UI/UX</span>
-      </div>
-
-      <div class="certificate-large">
-        <div class="cert-header">
-          <i class="fas fa-award"></i>
-          <span>Сертификаты</span>
-        </div>
-        <div class="cert-desc">
-          <i class="fas fa-check-circle"></i> Fullstack-разработчик (Stepik, 2024)<br>
-          <i class="fas fa-check-circle"></i> React Professional (Coursera, 2024)<br>
-          <i class="fas fa-check-circle"></i> Vue.js Advanced (Codecademy, 2023)<br>
-          <i class="fas fa-check-circle"></i> Node.js API (Hexlet, 2024)
-        </div>
-        <span class="cert-badge"><i class="fas fa-star"></i> 8+ завершённых курсов</span>
-      </div>
-    </div>
-
-    <div class="footnote">
-      <i class="fas fa-mobile-alt"></i> адаптивно · <i class="fas fa-heart" style="color: #f97316;"></i> тёмная тема · 6 проектов (включая музыку)
-    </div>
-  </main>
 </body>
 </html>
