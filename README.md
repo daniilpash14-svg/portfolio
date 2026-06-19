@@ -11,9 +11,7 @@
 
 ## 📸 Превью
 
-<p align="center">
-  <img src="https://daniilpash14-svg.github.io/portfolio/preview.png" alt="Сайт-визитка Daniil Pashkevich" width="100%">
-</p>
+https://daniilpash14-svg.github.io/portfolio/
 
 > **Примечание:** Если изображение не отображается, замените ссылку на скриншот вашего сайта или добавьте файл `preview.png` в корень репозитория.
 
