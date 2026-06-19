@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniil Pashkevich · Портфолио + Игра</title>
+    <title>Daniil Pashkevich · Портфолио + Игра + Бот</title>
     <style>
         * {
             margin: 0;
@@ -236,6 +236,74 @@
 
         .project-card .link:hover {
             color: #fbbf24;
+        }
+
+        /* БОТ-КАРТОЧКА */
+        .bot-card {
+            background: rgba(30, 30, 50, 0.6);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid #2a2a4a;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .bot-card:hover {
+            border-color: #f97316;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.15);
+        }
+
+        .bot-card .bot-icon {
+            font-size: 64px;
+            background: rgba(249, 115, 22, 0.15);
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .bot-card .bot-info h3 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .bot-card .bot-info .bot-username {
+            color: #f97316;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .bot-card .bot-info p {
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .bot-card .bot-info .btn-bot {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 30px;
+            background: #f97316;
+            color: #0a0a1a;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .bot-card .bot-info .btn-bot:hover {
+            background: #fb923c;
+            transform: scale(1.05);
         }
 
         /* ИГРА */
@@ -532,6 +600,11 @@
             .game-container {
                 aspect-ratio: 800/600;
             }
+
+            .bot-card {
+                flex-direction: column;
+                text-align: center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -543,10 +616,19 @@
                 padding: 8px 15px;
                 font-size: 14px;
             }
+
+            .bot-card .bot-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 40px;
+            }
+
+            .bot-card .bot-info h3 {
+                font-size: 20px;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Pygame.js для запуска Python-игры в браузере -->
     <script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js"></script>
 </head>
 <body>
@@ -571,7 +653,7 @@
             <div class="profile-info">
                 <h1>Daniil Pashkevich</h1>
                 <span class="badge"><i class="fas fa-code"></i> курсы программирования</span>
-                <p>Frontend & fullstack-разработчик. 6 проектов, 4 платформы, музыка и игры в свободное время.</p>
+                <p>Frontend & fullstack-разработчик. 6 проектов, 4 платформы, музыка, игры и боты.</p>
             </div>
         </div>
 
@@ -660,6 +742,21 @@
                     <span>Tailwind</span>
                 </div>
                 <a href="#" class="link">Посмотреть →</a>
+            </div>
+        </div>
+
+        <!-- БЛОК С ТЕЛЕГРАМ-БОТОМ -->
+        <div class="bot-card">
+            <div class="bot-icon">
+                <i class="fab fa-telegram" style="color: #f97316;"></i>
+            </div>
+            <div class="bot-info">
+                <h3>🤖 Telegram-бот</h3>
+                <div class="bot-username">@daniiltesstbot</div>
+                <p>Простой Telegram-бот, созданный для тестирования и обучения. Может выполнять базовые команды и отвечать на сообщения.</p>
+                <a href="https://t.me/daniiltesstbot" target="_blank" class="btn-bot">
+                    <i class="fab fa-telegram"></i> Перейти в бота
+                </a>
             </div>
         </div>
     </div>
@@ -752,7 +849,7 @@
     </div>
 
     <div class="footer">
-        <i class="fas fa-mobile-alt"></i> адаптивно · <i class="fas fa-heart"></i> Daniil Pashkevich · 6 проектов + игра
+        <i class="fas fa-mobile-alt"></i> адаптивно · <i class="fas fa-heart"></i> Daniil Pashkevich · 6 проектов + игра + бот
     </div>
 </div>
 
@@ -807,15 +904,14 @@
             const micropip = pyodide.pyimport('micropip');
             await micropip.install('pygame');
 
-            // Код игры
+            // Код игры (упрощённая версия для браузера)
             const gameCode = `
 import pygame
 import random
+import math
 import json
 import os
-import math
 from datetime import datetime
-import js
 
 # Константы
 WIDTH, HEIGHT = 800, 600
@@ -1205,7 +1301,6 @@ def main():
         
     pygame.quit()
 
-# Запуск в браузере
 main()
 `;
 
@@ -1227,9 +1322,7 @@ main()
 
     // Запускаем игру при загрузке
     document.addEventListener('DOMContentLoaded', () => {
-        // Ждём, пока пользователь переключится на вкладку "Игра"
         const gameLink = document.querySelector('[data-section="game"]');
-        const originalClick = gameLink.onclick;
         
         gameLink.addEventListener('click', async function(e) {
             if (!gameRunning) {
@@ -1246,7 +1339,6 @@ main()
 
     function restartGame() {
         if (gameRunning) {
-            // Перезапуск через Pyodide
             try {
                 pyodide.runPython(`
                     # Пересоздаём игру
@@ -1258,7 +1350,6 @@ main()
         }
     }
 
-    // Для старых браузеров — загружаем сразу
     setTimeout(() => {
         if (!gameRunning && document.getElementById('game').classList.contains('active')) {
             startGame();
